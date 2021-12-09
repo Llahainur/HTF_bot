@@ -24,6 +24,7 @@ class Person(object):
         self.is_driver = is_driver
 
 
+
 if __name__ == "__main__":
     P = Person("Москва, Ленинградское Ш", "Казань", "Вася", "89898989898", True)
     print(P.array())

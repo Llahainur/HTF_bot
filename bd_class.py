@@ -33,11 +33,11 @@ def adddata(Pers):
         connect = sql.connect(bd_name)
         curs = connect.cursor()
         data = array_maker(Pers)
-        print("Подключен к SQLite")
+        #print("Подключен к SQLite")
         curs.execute("""INSERT INTO users (name, phone,ar_lat,ar_lon,ar_addr,dest_lat,dest_lon,dest_addr,is_driver) 
         VALUES(?,?,?,?,?,?,?,?,?);""", data)
         connect.commit()
-        print(Pers.name, "добавлен в базу")
+        #print(Pers.name, "добавлен в базу")
         curs.close()
         connect.close()
     except sql.Error as error:
@@ -45,41 +45,26 @@ def adddata(Pers):
     finally:
         if connect:
             connect.close()
-            print("Соединение с SQLite закрыто")
+            #print("Соединение с SQLite закрыто")
 
 
 def readdata():
     try:
         sqlite_connection = sql.connect('data.db')
         cursor = sqlite_connection.cursor()
-        print("Подключен к SQLite")
+        #print("Подключен к SQLite")
 
         sqlite_select_query = """SELECT * from users"""
         cursor.execute(sqlite_select_query)
         records = cursor.fetchall()
-        print("Всего строк:  ", len(records))
-        arr_of_p = []
-        i = 0
-        for row in recs:
-            P = Person
-            P.name = row[0]
-            P.phone = row[1]
-            P.ar_lat = row[2]
-            P.ar_lon = row[3]
-            P.ar_addr = row[4]
-            P.des_lat = row[5]
-            P.des_lon = row[6]
-            P.des_addr = row[7]
-            P.is_driver = row[8]
-            arr_of_p.append(P)
-        return arr_of_p
+        #print("Всего строк:  ", len(records))
     except sql.Error as error:
         print("Ошибка при чтении SQLite", error)
     finally:
         if sqlite_connection:
             cursor.close()
             sqlite_connection.close()
-            print("Соединение с SQLite закрыто")
+            #print("Соединение с SQLite закрыто")
             return records
 
 
