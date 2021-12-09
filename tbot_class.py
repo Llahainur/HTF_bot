@@ -67,7 +67,13 @@ def wait(message):
     bot.send_message(message.from_user.id,
                      "Ваш адрес начала маршрута" + P.geocode_arr["addr"] + "Ваш адрес конца маршрута" + P.geocode_dest[
                          "addr"])
-    bot.send_message(message.from_user.id, "Подождите, подбираем вам попутчиков")
+    bot.send_message(message.from_user.id, "Подождите, подбираем вам попутчиков...")
+    # bd.find
+    bot.register_next_step_handler(message, found)
+
+
+def found(message):
+    pass
 
 
 bot.polling(none_stop=True, interval=0)

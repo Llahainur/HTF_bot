@@ -9,8 +9,8 @@ def dist(geocode_1, geocode_2):
 
 class Person(object):
     def __init__(self, addr_arr, addr_dest, name, phone, is_driver):
-        self.addr_arr = addr_arr
-        self.addr_dest = addr_dest
+        self.addr_arr = addr_arr  # не идет в БД
+        self.addr_dest = addr_dest  # не идет в БД
         self.name = name
         self.phone = phone
         self.geocode_arr = request(addr_arr)
@@ -19,8 +19,8 @@ class Person(object):
 
 
 
+
+
 if __name__ == "__main__":
-    P = Person("Москва", "Казань", "Вася", "89898989898", True)
-    print(P.geocode_arr)
-    print(P.name, dist(P.geocode_arr, P.geocode_dest))
-    print(P.geocode_arr["addr"])
+    P = Person("Москва, Ленинградское Ш", "Казань", "Вася", "89898989898", True)
+    print(P.array())
