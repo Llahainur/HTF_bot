@@ -40,6 +40,7 @@ def adddata(Pers):
         #print(Pers.name, "добавлен в базу")
         curs.close()
         connect.close()
+        print("Called addata")
     except sql.Error as error:
         print("Ошибка при чтении SQLite", error)
     finally:
@@ -57,7 +58,7 @@ def readdata():
         sqlite_select_query = """SELECT * from users"""
         cursor.execute(sqlite_select_query)
         records = cursor.fetchall()
-        #print("Всего строк:  ", len(records))
+        print("Called readdata")
     except sql.Error as error:
         print("Ошибка при чтении SQLite", error)
     finally:
@@ -73,10 +74,10 @@ def readdata():
 
 if __name__ == "__main__":
     init_db()
-    P1 = Person("Москва, ленинградское ш 11", "Москва ленинградское ш 12", "Додик", "89898933398", True)
-    P2 = Person("Москва, парк горького", "Москва, речной вокзал", "sssssя", "11111111", False)
-    #BD.adddata(P1)
-    #BD.adddata(P2)
+    P1 = Person("Люберцы", "Москва", "Вася", "89898933398", True)
+    P2 = Person("Химки", "Москва", "Невася", "11111111", False)
+    adddata(P1)
+    adddata(P2)
     recs = readdata()
     for row in recs:
         print("Имя:", row[0])

@@ -29,6 +29,7 @@ def request(addr_in):
             lat = j_geo[0]["lat"]
             lon = j_geo[0]["lon"]
             addr = j_geo[0]["display_name"]
+            print("called Geocoder")
             return {"lat": lat, "lon": lon, "addr": addr}
         except:
             print("Http error")
