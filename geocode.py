@@ -31,9 +31,8 @@ def request(addr_in):
             addr = j_geo[0]["display_name"]
             return {"lat": lat, "lon": lon, "addr": addr}
         except:
-            return "http error"
+            print("Http error")
 
 
 if __name__ == "__main__":
     res = request("Москва Ленинские горы 1")
-    print(res)
