@@ -39,35 +39,7 @@ def path_diff(path1=Path, path2=Path):
     return round(diff, 4), startdiff, enddiff
 
 
-def mass_path_diff(arr_of_Paths, search_id):
-    l = len(arr_of_Paths)
-    res = [0] * l
-    for i in range(l):
-        res[i] = [0] * l
-    found_id = 0
-
-    for i in range(len(arr_of_Paths)):
-        for j in range(i + 1, len(arr_of_Paths)):
-            res[i][j] = path_diff(arr_of_Paths[i], arr_of_Paths[j])
-            found_diff = res[i][j][0]
-
-            if i == search_id and res[i][j][0] < found_diff:
-                found_id = [i, j]
-                found_diff = res[i][j][0]
-            elif j == search_id and res[i][j][0] < found_diff:
-                found_id = [i, j]
-                found_diff = res[i][j][0]
-
-            print(path_diff(arr_of_Paths[i], arr_of_Paths[j]), i, j)
-    return res, found_id, found_diff
-
-
 if __name__ == "__main__":
     recs = readdata()
     P_arr = recs_to_arr(recs)
     print("Записей принято: " + str(len(P_arr)))
-    P1 = Path
-    P2 = Path
-    P1, P2 = P_arr[0], P_arr[1]
-    diff, id, found_d = mass_path_diff(P_arr, 2)
-    print(id, found_d)
