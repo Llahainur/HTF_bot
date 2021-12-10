@@ -33,11 +33,11 @@ def adddata(Pers):
         connect = sql.connect(bd_name)
         curs = connect.cursor()
         data = array_maker(Pers)
-        #print("Подключен к SQLite")
+        # print("Подключен к SQLite")
         curs.execute("""INSERT INTO users (name, phone,ar_lat,ar_lon,ar_addr,dest_lat,dest_lon,dest_addr,is_driver) 
         VALUES(?,?,?,?,?,?,?,?,?);""", data)
         connect.commit()
-        #print(Pers.name, "добавлен в базу")
+        # print(Pers.name, "добавлен в базу")
         curs.close()
         connect.close()
         print("Called addata")
@@ -46,14 +46,14 @@ def adddata(Pers):
     finally:
         if connect:
             connect.close()
-            #print("Соединение с SQLite закрыто")
+            # print("Соединение с SQLite закрыто")
 
 
 def readdata():
     try:
         sqlite_connection = sql.connect('data.db')
         cursor = sqlite_connection.cursor()
-        #print("Подключен к SQLite")
+        # print("Подключен к SQLite")
 
         sqlite_select_query = """SELECT * from users"""
         cursor.execute(sqlite_select_query)
@@ -65,19 +65,18 @@ def readdata():
         if sqlite_connection:
             cursor.close()
             sqlite_connection.close()
-            #print("Соединение с SQLite закрыто")
+            # print("Соединение с SQLite закрыто")
             return records
-
-
-
 
 
 if __name__ == "__main__":
     init_db()
     P1 = Person("Люберцы", "Москва", "Вася", "89898933398", True)
     P2 = Person("Химки", "Москва", "Невася", "11111111", False)
+    P3 = Person("Москва, Кремль", "Барвиха", "Путин", "2222222", True)
     adddata(P1)
     adddata(P2)
+    adddata(P3)
     recs = readdata()
     for row in recs:
         print("Имя:", row[0])
