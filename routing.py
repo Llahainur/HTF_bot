@@ -3,25 +3,38 @@ from bd_class import readdata
 from math import cos
 
 
-def distantion(ar1, ar2):
-    x1 = ar1[0]
-    y1 = ar1[1]
-    x2 = ar2[0]
-    y2 = ar2[1]
-    return (abs(x1 - x2) ** 2 + abs(y1 - y2) ** 2) ** 0.5
+class Point:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
 
+
+class Path:
+    def __init__(self, pointS, pointE):
+        self.pointS = pointS
+        self.pointE = pointE
+
+
+def point_diff(point1=Point, point2=Point):
+    return (abs(point1.x - point2.x) ** 2 + abs(point1.y - point2.y) ** 2) ** 0.5
+
+
+def path_diff(path1=Path, path2=Path):
+    startdiff = point_diff(path1.pointS, path2.pointS)
+    enddiff = point_diff(path1.pointE, path2.pointE)
+    diff = startdiff * enddiff
+    return diff, startdiff, enddiff
 
 
 def recs_to_arr(records):
     P_array = []
-    geo_arr = []
     i = 0
     for row in records:
-        num = (row[2] * row[3]) % (row[5] * row[6])
-        num = i
-        arr = ([float(row[2]), float(row[3])], [float(row[5]), float(row[6])], bool(row[8]))  # имя, коор
+        p1 = Point(float(row[2]), float(row[3]))
+        p2 = Point(float(row[5]), float(row[6]))
+        path = Path(p1, p2)
         # нач, коор конц, водитель?,номер записи
-        P_array.append(arr)
+        P_array.append(path)
         i = i + 1
     return P_array
 
@@ -30,4 +43,9 @@ if __name__ == "__main__":
     recs = readdata()
     P_arr = recs_to_arr(recs)
     print("Записей принято: " + str(len(P_arr)))
-    print(P_arr)  # первый индекс-номер записи, второй - начало (1) или конец (2) маршрута
+
+    P1=Path
+    P2=Path
+    P1,P2=P_arr[0],P_arr[1]
+    print(path_diff(P1,P2))
+
