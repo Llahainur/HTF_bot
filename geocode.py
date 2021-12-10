@@ -32,7 +32,7 @@ def request(addr_in):
             print("called Geocoder")
             return {"lat": lat, "lon": lon, "addr": addr}
         except:
-            print("Http error")
+            print("Http error", addr)
 
 
 if __name__ == "__main__":
