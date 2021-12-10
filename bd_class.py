@@ -1,6 +1,7 @@
 import sqlite3 as sql
 from classes import Person
 from geocode import *
+import time
 
 bd_name = "data.db"
 
@@ -30,6 +31,7 @@ def array_maker(Pers):
 
 def adddata(Pers):
     try:
+        t=time.time()
         connect = sql.connect(bd_name)
         curs = connect.cursor()
         data = array_maker(Pers)
@@ -47,10 +49,12 @@ def adddata(Pers):
         if connect:
             connect.close()
             # print("Соединение с SQLite закрыто")
+            print("time ",time.time()-t)
 
 
 def readdata():
     try:
+        t=time.time()
         sqlite_connection = sql.connect('data.db')
         cursor = sqlite_connection.cursor()
         # print("Подключен к SQLite")
@@ -66,6 +70,7 @@ def readdata():
             cursor.close()
             sqlite_connection.close()
             # print("Соединение с SQLite закрыто")
+            print("time ",time.time()-t)
             return records
 
 

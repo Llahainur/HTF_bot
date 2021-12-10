@@ -1,6 +1,7 @@
 # https://nominatim.openstreetmap.org/search.php?q=Казань+магистральная+улица+77&format=jsonv2
 import json
 import requests
+import time
 
 
 def validate_addr_str(str):
@@ -9,6 +10,7 @@ def validate_addr_str(str):
 
 
 def request(addr_in):
+    t = time.time()
     try:
         addr = validate_addr_str(addr_in)
 
@@ -33,6 +35,8 @@ def request(addr_in):
             return {"lat": lat, "lon": lon, "addr": addr}
         except:
             print("Http error", addr)
+    finally:
+        print("geocode time ", time.time() - t)
 
 
 if __name__ == "__main__":

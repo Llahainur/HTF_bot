@@ -1,6 +1,6 @@
 from classes import Person
 from bd_class import readdata
-from math import cos
+from math import cos, pi
 import time
 
 
@@ -29,6 +29,7 @@ def recs_to_arr(records):
 def point_diff(point1=Point, point2=Point):  # ищет расстояние между двумя точками, переводя в километры. Точность 5%
     Klat = 111.12
     Klon = 64  # коэфф град->километр, по Москве
+    Klon = Klat * cos(point1.x * pi / 180)
     return round(((abs((point1.x - point2.x) * Klat) ** 2 + abs((point1.y - point2.y) * Klon) ** 2) ** 0.5), 2)
 
 
@@ -43,3 +44,5 @@ if __name__ == "__main__":
     recs = readdata()
     P_arr = recs_to_arr(recs)
     print("Записей принято: " + str(len(P_arr)))
+    p = path_diff(P_arr[0], P_arr[1])
+    print(p)
